@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "12113745422",
+    "firebase_url": "https://chrome-remote-controller.firebaseio.com",
+    "project_id": "chrome-remote-controller",
+    "storage_bucket": "chrome-remote-controller.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12113745422:android:6570e1a4d9d50613",
+        "android_client_info": {
+          "package_name": "com.mkhoi.chromeremotecontroller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12113745422-gbchf054mi7auvbckq2io2597b0s4hac.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mkhoi.chromeremotecontroller",
+            "certificate_hash": "8edb9c2824c8f3b51ace1e5029691db6e0d05fc9"
+          }
+        },
+        {
+          "client_id": "12113745422-0qaaa1p9m5l668r21tbi2b75p1f5cpjd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSjU1pHOtC24sEgGCUZmDecjx2pE7XL_c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12113745422-0qaaa1p9m5l668r21tbi2b75p1f5cpjd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
