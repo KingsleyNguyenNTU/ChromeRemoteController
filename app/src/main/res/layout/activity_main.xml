@@ -26,10 +26,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        tools:text="Not Connected"
+        android:padding="8dp"
+        android:text="@string/not_connected_label"
         app:layout_constraintBottom_toBottomOf="@+id/turnOffButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/turnOffButton"
+        android:background="@drawable/rounded_corner_background"
         android:contentDescription="@string/select_connected_pc_button_cd"/>
 
     <ImageButton

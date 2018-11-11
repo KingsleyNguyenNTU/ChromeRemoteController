@@ -1,5 +1,6 @@
 package com.mkhoi.chromeremotecontroller.database
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 
 @Dao
@@ -14,5 +15,5 @@ interface PCDao {
     fun delete(entity: PCEntity)
 
     @Query("select * from PCEntity")
-    fun getAll(): List<PCEntity>
+    fun getAll(): LiveData<List<PCEntity>>
 }

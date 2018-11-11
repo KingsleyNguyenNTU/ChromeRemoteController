@@ -2,4 +2,11 @@
     <string name="app_name">Chrome Remote Controller</string>
     <string name="vol_label">VOL</string>
     <string name="tab_label">TAB</string>
+    <string name="pick_pc_dialog_title">Pick Connected Devices</string>
+    <string name="not_connected_label">Not Connected</string>
+    <string name="add_btn_label">Add</string>
+    <string name="cancel_btn_label">Cancel</string>
+    <string name="no_connected_pc_msg_dialog">There\'s no connected devices yet. Adding new one to start remote controlling.</string>
+    <string name="no_camera_permission">Without camera permission, this app won\'t be able to run.</string>
+    <string name="retry_btn_label">Retry</string>
 </resources>

@@ -15,6 +15,10 @@ class AppModule(val app: MyApp) {
 
     @Provides
     @Singleton
+    fun providePCDao(appDatabase: AppDatabase) =  appDatabase.pcDao()
+
+    @Provides
+    @Singleton
     fun provideDatabase() =  Room.databaseBuilder(app, AppDatabase::class.java, AppDatabase.DB_NAME)
             .build()
 }
