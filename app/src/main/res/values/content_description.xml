@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="increase_volume_button_cd">Increase volume</string>
+    <string name="turn_off_button_cd">Close tab</string>
+    <string name="select_connected_pc_button_cd">Connect PC</string>
+    <string name="mute_button_cd">Mute</string>
+    <string name="new_page_button_cd">New page</string>
+    <string name="decrease_volume_button_cd">Decrease volume</string>
+    <string name="next_tab_button_cd">Next tab</string>
+    <string name="previous_tab_button_cd">Previous tab</string>
+    <string name="play_button_cd">Play</string>
+    <string name="rewind_button_cd">Rewind</string>
+    <string name="forward_button_cd">Forward</string>
+    <string name="forward_30_button_cd">Forward 30 seconds</string>
+    <string name="rewind_30_button_cd">Rewind 30 seconds</string>
+</resources>
