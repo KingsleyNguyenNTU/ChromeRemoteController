@@ -1,7 +1,7 @@
 package com.mkhoi.chromeremotecontroller.qrcode
 
-import com.google.android.gms.vision.barcode.Barcode
 import android.support.annotation.UiThread
+import com.google.android.gms.vision.barcode.Barcode
 
 interface QRCodeDetectListener {
     @UiThread

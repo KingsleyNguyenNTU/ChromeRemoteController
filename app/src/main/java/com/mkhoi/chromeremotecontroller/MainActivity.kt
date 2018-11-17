@@ -1,21 +1,15 @@
 package com.mkhoi.chromeremotecontroller
 
 import android.arch.lifecycle.Observer
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.google.android.gms.vision.barcode.Barcode.QR_CODE
 import com.google.firebase.functions.FirebaseFunctions
-import kotlinx.android.synthetic.main.activity_main.*
-import com.google.android.gms.vision.barcode.BarcodeDetector
-import com.google.android.gms.vision.MultiProcessor
-import com.google.android.gms.vision.barcode.Barcode
-import com.mkhoi.chromeremotecontroller.qrcode.QRCodeDetectListener
 import com.mkhoi.chromeremotecontroller.qrcode.QRCodeReaderActivity
-import com.mkhoi.chromeremotecontroller.qrcode.QRCodeTrackerFactory
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {

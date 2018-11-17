@@ -4,23 +4,17 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.pm.PackageManager
-import android.hardware.Camera
-import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.support.annotation.RequiresPermission
 import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.SurfaceHolder
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.MultiProcessor
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.mkhoi.chromeremotecontroller.R
 import kotlinx.android.synthetic.main.activity_qrcode_reader.*
-import android.view.SurfaceHolder
-
 
 
 class QRCodeReaderActivity : AppCompatActivity(), QRCodeDetectListener {
