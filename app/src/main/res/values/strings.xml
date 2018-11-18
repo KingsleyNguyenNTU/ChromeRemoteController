@@ -9,4 +9,7 @@
     <string name="no_connected_pc_msg_dialog">There\'s no connected devices yet. Adding new one to start remote controlling.</string>
     <string name="no_camera_permission">Without camera permission, this app won\'t be able to run.</string>
     <string name="retry_btn_label">Retry</string>
+    <string name="ok_btn_label">OK</string>
+    <string name="input_pc_name_title_dialog">Device Name</string>
+    <string name="input_pc_name_msg_dialog">Name of new connected device</string>
 </resources>

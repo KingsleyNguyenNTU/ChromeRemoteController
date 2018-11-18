@@ -1,5 +1,7 @@
 package com.mkhoi.chromeremotecontroller
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -7,12 +9,18 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.widget.EditText
 import com.google.firebase.functions.FirebaseFunctions
 import com.mkhoi.chromeremotecontroller.qrcode.QRCodeReaderActivity
+import com.mkhoi.chromeremotecontroller.qrcode.QRCodeReaderActivity.Companion.DATA_TOKEN_ID_KEY
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        const val TOKEN_ID_FROM_CAMERA_REQUEST_CODE = 2
+    }
 
     private lateinit var viewModel: MainViewModel
 
@@ -22,6 +30,31 @@ class MainActivity : AppCompatActivity() {
 
         initViewModelObserver()
         initButtonListener()
+    }
+
+    @SuppressLint("InflateParams")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == TOKEN_ID_FROM_CAMERA_REQUEST_CODE){
+            if (resultCode == Activity.RESULT_OK) {
+                data?.let {
+                    val tokenId = it.getStringExtra(DATA_TOKEN_ID_KEY)
+
+                    val dialogView = layoutInflater.inflate(R.layout.input_pc_name_dialog, null)
+                    val pcNameEditText = dialogView.findViewById<EditText>(R.id.input_pc_name_edit_text)
+
+                    val builder = android.app.AlertDialog.Builder(this)
+                    builder.setTitle(R.string.input_pc_name_title_dialog)
+                            .setView(dialogView)
+                            .setPositiveButton(R.string.ok_btn_label){_,_ ->
+                                viewModel.updateSelectedPc(this, pcNameEditText.text.toString(), tokenId)
+                            }
+                            .setNegativeButton(R.string.cancel_btn_label){ dialog, _ -> dialog.cancel()}
+                            .show()
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     private fun initViewModelObserver(){
@@ -36,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
                             .setPositiveButton(R.string.add_btn_label) { _, _ ->
                                 val intent = Intent(this, QRCodeReaderActivity::class.java)
-                                startActivity(intent)
+                                startActivityForResult(intent, TOKEN_ID_FROM_CAMERA_REQUEST_CODE)
                             }
                             .setNegativeButton(R.string.cancel_btn_label){ dialog, _ -> dialog.cancel()}
 

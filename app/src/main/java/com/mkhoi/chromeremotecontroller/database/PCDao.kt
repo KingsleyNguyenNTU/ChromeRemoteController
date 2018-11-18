@@ -16,4 +16,7 @@ interface PCDao {
 
     @Query("select * from PCEntity")
     fun getAll(): LiveData<List<PCEntity>>
+
+    @Query("select * from PCEntity where tokenId = :tokenId")
+    fun getPCByToken(tokenId: String): PCEntity?
 }

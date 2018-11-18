@@ -2,17 +2,21 @@ package com.mkhoi.chromeremotecontroller.qrcode
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.SurfaceHolder
+import android.widget.EditText
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.MultiProcessor
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
+import com.mkhoi.chromeremotecontroller.MainActivity
 import com.mkhoi.chromeremotecontroller.R
 import kotlinx.android.synthetic.main.activity_qrcode_reader.*
 
@@ -21,10 +25,15 @@ class QRCodeReaderActivity : AppCompatActivity(), QRCodeDetectListener {
 
     companion object {
         const val CAMERA_REQUEST_CODE = 1
+        const val DATA_TOKEN_ID_KEY = "DATA_TOKEN_ID_KEY"
     }
 
     override fun onQRCodeDetected(barcode: Barcode) {
         Log.d("QRCodeReaderActivity", barcode.displayValue)
+        val intent = Intent()
+        intent.putExtra(DATA_TOKEN_ID_KEY, barcode.displayValue)
+        setResult(RESULT_OK, intent)
+        finish()
     }
 
     private var cameraSource: CameraSource? = null
