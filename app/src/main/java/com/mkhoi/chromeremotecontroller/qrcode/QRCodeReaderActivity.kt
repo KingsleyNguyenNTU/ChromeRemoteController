@@ -71,6 +71,7 @@ class QRCodeReaderActivity : AppCompatActivity(), QRCodeDetectListener {
         cameraSource?.release()
     }
 
+    @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode != CAMERA_REQUEST_CODE) {
             Log.d("QRCodeReaderActivity", "Got unexpected permission result: $requestCode")
@@ -79,6 +80,7 @@ class QRCodeReaderActivity : AppCompatActivity(), QRCodeDetectListener {
         } else if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Log.d("QRCodeReaderActivity", "Camera permission granted - initialize the camera source")
             createCameraSource()
+            cameraSource?.start(surfaceHolder)
             return
         } else {
             Log.d("QRCodeReaderActivity", "Camera permission denied. Closed the app")
