@@ -19,7 +19,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_turn_off"
         android:backgroundTint="@android:color/holo_red_dark"
-        android:contentDescription="@string/turn_off_button_cd" />
+        android:contentDescription="@string/turn_off_button_cd"
+        android:onClick="onRemoteButtonClick"/>
 
     <Button
         android:id="@+id/selectConnectedPCButton"
@@ -45,7 +46,8 @@
         app:layout_constraintStart_toEndOf="@+id/volumeControlLayout"
         app:layout_constraintTop_toTopOf="@+id/volumeControlLayout"
         app:srcCompat="@drawable/ic_volume_off"
-        android:contentDescription="@string/mute_button_cd"/>
+        android:contentDescription="@string/mute_button_cd"
+        android:onClick="onRemoteButtonClick"/>
 
     <ImageButton
         android:id="@+id/newPageButton"
@@ -59,7 +61,8 @@
         app:layout_constraintStart_toStartOf="@+id/muteButton"
         app:layout_constraintTop_toBottomOf="@+id/muteButton"
         app:srcCompat="@drawable/ic_new_page"
-        android:contentDescription="@string/new_page_button_cd" />
+        android:contentDescription="@string/new_page_button_cd"
+        android:onClick="onRemoteButtonClick" />
 
     <LinearLayout
         android:id="@+id/volumeControlLayout"
@@ -83,7 +86,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
             app:srcCompat="@drawable/ic_add_volume"
-            android:contentDescription="@string/increase_volume_button_cd" />
+            android:contentDescription="@string/increase_volume_button_cd"
+            android:onClick="onRemoteButtonClick" />
 
         <TextView
             android:layout_width="match_parent"
@@ -104,7 +108,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:srcCompat="@drawable/ic_reduce_volume"
-            android:contentDescription="@string/decrease_volume_button_cd" />
+            android:contentDescription="@string/decrease_volume_button_cd"
+            android:onClick="onRemoteButtonClick" />
     </LinearLayout>
 
     <LinearLayout
@@ -129,7 +134,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
             app:srcCompat="@drawable/ic_next_tab"
-            android:contentDescription="@string/next_tab_button_cd"/>
+            android:contentDescription="@string/next_tab_button_cd"
+            android:onClick="onRemoteButtonClick"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -150,7 +156,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:srcCompat="@drawable/ic_previous_tab"
-            android:contentDescription="@string/previous_tab_button_cd" />
+            android:contentDescription="@string/previous_tab_button_cd"
+            android:onClick="onRemoteButtonClick"/>
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -164,7 +171,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_play"
         android:backgroundTint="@android:color/holo_red_dark"
-        android:contentDescription="@string/play_button_cd"/>
+        android:contentDescription="@string/play_button_cd"
+        android:onClick="onRemoteButtonClick"/>
 
     <ImageButton
         android:id="@+id/fastRewindButton"
@@ -181,7 +189,8 @@
         app:layout_constraintTop_toTopOf="@+id/playButton"
         app:srcCompat="@drawable/ic_fast_rewind"
         android:background="@drawable/oval_background"
-        android:contentDescription="@string/rewind_button_cd"/>
+        android:contentDescription="@string/rewind_button_cd"
+        android:onClick="onRemoteButtonClick"/>
 
     <ImageButton
         android:id="@+id/fastForwardButton"
@@ -198,7 +207,8 @@
         app:layout_constraintTop_toTopOf="@+id/playButton"
         app:srcCompat="@drawable/ic_fast_forward"
         android:background="@drawable/oval_background"
-        android:contentDescription="@string/forward_button_cd" />
+        android:contentDescription="@string/forward_button_cd"
+        android:onClick="onRemoteButtonClick"/>
 
     <ImageButton
         android:id="@+id/forward30sButton"
@@ -213,7 +223,8 @@
         app:layout_constraintTop_toTopOf="@+id/playButton"
         app:srcCompat="@drawable/ic_forward_30"
         android:background="@drawable/oval_background"
-        android:contentDescription="@string/forward_30_button_cd" />
+        android:contentDescription="@string/forward_30_button_cd"
+        android:onClick="onRemoteButtonClick" />
 
     <ImageButton
         android:id="@+id/rewind30sButton"
@@ -228,6 +239,7 @@
         app:layout_constraintTop_toTopOf="@+id/playButton"
         app:srcCompat="@drawable/ic_replay_30"
         android:background="@drawable/oval_background"
-        android:contentDescription="@string/rewind_30_button_cd"/>
+        android:contentDescription="@string/rewind_30_button_cd"
+        android:onClick="onRemoteButtonClick"/>
 
 </android.support.constraint.ConstraintLayout>

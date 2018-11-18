@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import com.google.firebase.functions.FirebaseFunctions
 import com.mkhoi.chromeremotecontroller.qrcode.QRCodeReaderActivity
@@ -20,6 +21,11 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val TOKEN_ID_FROM_CAMERA_REQUEST_CODE = 2
+
+        const val FIREBASE_DATA_TOKEN_KEY = "receiverTokenId"
+        const val FIREBASE_DATA_COMMAND_KEY = "command"
+        const val FIREBASE_DATA_OPTIONAL_PARAM_KEY = "optionalParameter"
+        const val FIREBASE_CLOUD_FUNCTION_NAME = "sendMessage"
     }
 
     private lateinit var viewModel: MainViewModel
@@ -29,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initViewModelObserver()
-        initButtonListener()
     }
 
     @SuppressLint("InflateParams")
@@ -94,24 +99,28 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun initButtonListener(){
-
+    fun onRemoteButtonClick(view: View){
+        Command.getCommandByViewId(view.id)?.let {
+            sendCommandMessage(it.name, it.optionalParameter)
+        }
     }
 
-    private fun sendCommandMessage(){
-        val data = HashMap<String, String>()
-        data["receiverTokenId"] = "APA91bFBTL0rg4Tw9dxRvwgWG94NHXSkg-7_Aj-E6WSSj5hXT3Z5O7E9PN6CRImtQdUaLNFqlGilI2HqslUkW7q_IK3qzewlfo1BT3pw8WrqdEMGnCivc48ynTv_FiIpYqggLvBcdcNS"
-        data["command"] = "Test"
-        data["optionalParameter"] = ""
+    private fun sendCommandMessage(command: String, optionalParameter: String){
+        viewModel.selectedPC.value?.let {
+            val data = HashMap<String, String>()
+            data[FIREBASE_DATA_TOKEN_KEY] = it.tokenId
+            data[FIREBASE_DATA_COMMAND_KEY] = command
+            data[FIREBASE_DATA_OPTIONAL_PARAM_KEY] = optionalParameter
 
-        FirebaseFunctions.getInstance()
-                .getHttpsCallable("sendMessage")
-                .call(data)
-                .addOnFailureListener {
-                    Log.wtf("Firebase", "Fail")
-                }
-                .addOnSuccessListener {
-                    Log.d("Firebase", "Done")
-                }
+            FirebaseFunctions.getInstance()
+                    .getHttpsCallable(FIREBASE_CLOUD_FUNCTION_NAME)
+                    .call(data)
+                    .addOnFailureListener {
+                        Log.wtf("Firebase", "Fail")
+                    }
+                    .addOnSuccessListener {
+                        Log.d("Firebase", "Done")
+                    }
+        }
     }
 }
