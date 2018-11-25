@@ -34,6 +34,23 @@ chrome.runtime.onInstalled.addListener(function() {
 	});
 });
 
+function jumpToTab(position) {
+	chrome.tabs.getSelected(function(currentTab) {
+	    var currentTabIndex = currentTab.index;
+	    chrome.tabs.query({currentWindow: true}, function (tabs) {
+	        var tabToActivateIndex = (currentTabIndex + position) % tabs.length;
+	        if (tabToActivateIndex < 0) tabToActivateIndex += tabs.length;
+	        chrome.tabs.query({index: tabToActivateIndex}, function(tabs){
+	          if (tabs.length) {
+	            var tabToActivate = tabs[0],
+	            tabToActivate_Id = tabToActivate.id;
+	            chrome.tabs.update(tabToActivate_Id, {active: true});
+	          }
+	        });
+	      });
+	});
+}
+
 chrome.gcm.onMessage.addListener(function(message) {
 	console.log('New message: ', message);
 	
@@ -43,6 +60,23 @@ chrome.gcm.onMessage.addListener(function(message) {
 			chrome.tabs.getSelected(function(tab) {
 			    chrome.tabs.remove(tab.id, function() { });
 			});
+			break;
+		case NEW_TAB:			
+			var optionalParameter = message.data.optionalParameter;
+			if (optionalParameter) {
+				if (!optionalParameter.startsWith('http')) {
+					optionalParameter = 'http://' + optionalParameter;
+				}
+				chrome.tabs.create({url: optionalParameter});
+			} else {
+				chrome.tabs.create({});
+			}
+			break;
+		case NEXT_TAB:
+			jumpToTab(1);
+			break;
+		case PREVIOUS_TAB:
+			jumpToTab(-1);
 			break;
 		case INCREASE_VOLUME:
 		case REDUCE_VOLUME:
