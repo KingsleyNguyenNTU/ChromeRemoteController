@@ -15,7 +15,7 @@ const FORWARD = 'FORWARD';
 const PLAY = 'PLAY';
 
 function registerCallback(registrationId) {
-	console.log('registrationId: ', registrationId);
+	console.debug('registrationId: ', registrationId);
 	if (chrome.runtime.lastError)
 		return;
 
@@ -52,13 +52,13 @@ function jumpToTab(position) {
 }
 
 chrome.gcm.onMessage.addListener(function(message) {
-	console.log('New message: ', message);
+	console.debug('New message: ', message);
 	
 	var command = message && message.data && message.data.command;
 	switch (command){
 		case TURN_OFF:
 			chrome.tabs.getSelected(function(tab) {
-			    chrome.tabs.remove(tab.id, function() { });
+			    chrome.tabs.remove(tab.id);
 			});
 			break;
 		case NEW_TAB:			
@@ -86,8 +86,8 @@ chrome.gcm.onMessage.addListener(function(message) {
 		case REWIND:	
 		case FORWARD:	
 		case PLAY:	
-			chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-				chrome.tabs.sendMessage(tabs[0].id, {command: command});
+			chrome.tabs.getSelected(function(tab) {
+				chrome.tabs.sendMessage(tab.id, {command: command});
 			});
 			break;			
 		default: break;

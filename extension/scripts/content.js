@@ -15,44 +15,42 @@ console.log('Content script running.');
 
 function changeVideoTime(video, time){
 	var currentTime = video.currentTime;
-	console.log('Current time: ', currentTime);
+	console.debug('Current time: ', currentTime);
 	currentTime += time;
 	currentTime = (currentTime < 0) ? 0 : currentTime;
 	video.currentTime = currentTime;
-	console.log('New time: ', currentTime);
+	console.debug('New time: ', currentTime);
 }
 
 function isPlaying(video){
 	return video.currentTime > 0 && !video.paused && !video.ended;
 }
 
+function changeVolume(video, changedVolume) {
+	var currentVolume = video.volume;
+	console.debug('Current volume: ', currentVolume);
+	currentVolume += changedVolume;
+	currentVolume = (currentVolume > 1) ? 1 : currentVolume;
+	currentVolume = (currentVolume < 0) ? 0 : currentVolume;
+	video.volume = currentVolume;
+	console.debug('New volume: ', currentVolume);
+}
+
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
-		console.log('Receving new message.');
+		console.debug('Receving new message.');
 		var video = document.querySelector("video");
 		
 		if (video) {
 			switch (request.command){
 				case INCREASE_VOLUME:					
-					var currentVolume = video.volume;
-					console.log('Current volume: ', currentVolume);
-					currentVolume += 0.1;
-					currentVolume = (currentVolume > 1) ? 1 : currentVolume;
-					video.volume = currentVolume;
-					console.log('New volume: ', currentVolume);
+					changeVolume(video, 0.1);
 					break;
 				case REDUCE_VOLUME:
-					var currentVolume = video.volume;
-					console.log('Current volume: ', currentVolume);
-					currentVolume -= 0.1;
-					currentVolume = (currentVolume < 0) ? 0 : currentVolume;
-					video.volume = currentVolume;
-					console.log('New volume: ', currentVolume);
+					changeVolume(video, -0.1);
 					break;
 				case MUTE:
-					console.log('Is Mute: ', video.muted);
 					video.muted = !video.muted;
-					console.log('Set Mute: ', video.muted);
 					break;
 				case LAST_30S:
 					changeVideoTime(video, -30);
