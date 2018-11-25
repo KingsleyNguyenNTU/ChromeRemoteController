@@ -40,11 +40,17 @@ chrome.gcm.onMessage.addListener(function(message) {
 	var command = message && message.data && message.data.command;
 	switch (command){
 		case TURN_OFF:
-			console.debug('Close tab');
 			chrome.tabs.getSelected(function(tab) {
 			    chrome.tabs.remove(tab.id, function() { });
 			});
 			break;
+		case INCREASE_VOLUME:
+		case REDUCE_VOLUME:
+		case MUTE:
+			chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+				chrome.tabs.sendMessage(tabs[0].id, {command: command});
+			});
+			break;			
 		default: break;
 	}
 });
