@@ -1,6 +1,6 @@
 {
 	"name": "Chrome Remote Controller",
-	"version": "0.3.1",
+	"version": "0.4.2",
 	"description": "Control Chrome browser from Android phone!",
     "background": {
       "persistent": false,

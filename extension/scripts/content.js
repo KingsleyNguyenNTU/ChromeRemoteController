@@ -13,6 +13,19 @@ const FORWARD = 'FORWARD';
 const PLAY = 'PLAY';
 console.log('Content script running.');
 
+function changeVideoTime(video, time){
+	var currentTime = video.currentTime;
+	console.log('Current time: ', currentTime);
+	currentTime += time;
+	currentTime = (currentTime < 0) ? 0 : currentTime;
+	video.currentTime = currentTime;
+	console.log('New time: ', currentTime);
+}
+
+function isPlaying(video){
+	return video.currentTime > 0 && !video.paused && !video.ended;
+}
+
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
 		console.log('Receving new message.');
@@ -40,6 +53,25 @@ chrome.runtime.onMessage.addListener(
 					console.log('Is Mute: ', video.muted);
 					video.muted = !video.muted;
 					console.log('Set Mute: ', video.muted);
+					break;
+				case LAST_30S:
+					changeVideoTime(video, -30);
+					break;
+				case NEXT_30S:
+					changeVideoTime(video, 30);
+					break;
+				case REWIND:
+					changeVideoTime(video, -10);
+					break;	
+				case FORWARD:	
+					changeVideoTime(video, 10);
+					break;
+				case PLAY:
+					if (isPlaying(video)){
+						video.pause();
+					} else {
+						video.play();
+					}
 					break;
 				default: break;
 			}
